@@ -27,9 +27,8 @@ def get_window_rect(hwnd):
         return rect.left, rect.top, rect.right, rect.bottom
 
 
-def get_window_pos(name):
-    name = name
-    handle = win32gui.FindWindow(0, name)
+def get_window_pos(win_name):
+    handle = win32gui.FindWindow(0, win_name)
     # 获取窗口句柄
     if handle == 0:
         return None
@@ -38,8 +37,8 @@ def get_window_pos(name):
         return get_window_rect(handle), handle
 
 
-def fetch_image():
-    (x1, y1, x2, y2), handle = get_window_pos("Yu-Gi-Oh! DUEL LINKS")
+def fetch_image(win_name):
+    (x1, y1, x2, y2), handle = get_window_pos(win_name)
     # 发送还原最小化窗口的信息
     win32gui.SendMessage(handle, win32con.WM_SYSCOMMAND, win32con.SC_RESTORE, 0)
     # 设为高亮
@@ -56,6 +55,7 @@ def click(pos):
 
 if __name__ == "__main__":
     import cv2
+    name = "Yu-Gi-Oh! DUEL LINKS"
     image, start_pos = fetch_image()
     # 转为灰度图
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
