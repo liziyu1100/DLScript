@@ -6,7 +6,7 @@ import pyautogui
 # use 'pip install pywin32' to install
 import win32con, win32gui
 from PIL import Image, ImageGrab
-
+import cv2
 import time
 
 # 防止UI放大导致截图不完整
@@ -78,7 +78,6 @@ def isRight(image, template1):
 
 
 if __name__ == "__main__":
-    import cv2
     image, start_pos = fetch_image()
     template = cv2.imread('./img/start_game.png', cv2.IMREAD_UNCHANGED)
     template2 = cv2.imread('./img/gate.png', cv2.IMREAD_UNCHANGED)
